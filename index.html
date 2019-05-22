@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Q & A Game</title>
+</head>
+<body>
+    <h1>Question & Answer Game</h1>
+    <p>Answer the questions with "t" for True or "f" for False.</p>
+    <p><strong><span id="question"></span></strong></p>
+    <p><strong>Score is: <span id="score"></span></strong></p>
+    <script type="text/javascript">
+    
+    // list questions in constant variable
+        const $question = document.getElementById("question");
+        const $score = document.getElementById("score");     
+
+        const questions = [
+            {q: "Does Ryan have 2 cats?", a: "t"},
+            {q: "Is Berkeley south of Oakland", a: "f"},
+            {q: "Did the Warriors sweep the Trail Blazers", a: "t"},
+            {q: "Is Salesforce Tower the highest building on the west coast?", a: "f"},
+            {q: "Is down also up?", a: "f"},
+            {q: "Are the Warriors moving to San Jose?", a: "f"},
+            {q: "Is there normally traffic on 80 in Berkeley", a: "t"},
+            {q: "Was Aaron Rodgets upset with the season finale of Game of Thrones", a: "t"},
+            {q: "Are there 16 oz in a pint?", a: "t"},
+            {q: "Is 512 / 8 = 54", a: "f"},
+        ];
+
+// variable for keeping score
+let score = 0;
+// var index
+let questionIndex = 0;
+
+//create a function for rendering the current question
+const renderQuestion = () => {
+    if(questionIndex < (questions.length)) {
+        $question.textContent = questions[questionIndex].q;
+    } else{
+        $question.textContent = "Game over";
+        $score.textContent = `FINAL SCORE OF ${score}`;
+    }
+};
+
+//create a function that updats the score
+
+const renderScore = () => {
+    $score.textContent = score;
+}
+
+//call render question
+renderQuestion();
+//call render score
+renderScore();
+
+//on keyup if the user le
+document.onkeyup = (event) => {
+    if(questionIndex === questions.length) {
+        return;
+    }
+    
+    const userInput = event.key.toLowerCase();
+
+    if(userInput === "t" || userInput === "f") {
+        if(questions[questionIndex].a === userInput) {
+            score++;
+            renderScore();
+        } else {
+            alert("WRONG!!");
+        }
+        questionIndex++;
+        renderQuestion();
+    }
+
+}
+
+
+    </script>
+</body>
+</html>
